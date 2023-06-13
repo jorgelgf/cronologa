@@ -92,7 +92,7 @@ export default function App() {
   <Layout>
   <section>
   
-    <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto'}} >
+    <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto' }} >
        <div style={{marginBottom:'.2rem'}}>
           {bool &&<span><Input onChange={(e)=>setName(e.target.value)} value={name} title={obj.inputName} type="string" placeholder={obj.inputName} style={SXtext}/></span>}
           {boolProblem && <span><Input onClick={()=>setProblem(`${datTime.toLocaleString()} - `)}onChange={(e)=>setProblem(e.target.value)} value={problem} title ={obj.inputDesc}type="string"  placeholder={obj.inputDesc} style={SXtext}/></span>}
@@ -100,20 +100,19 @@ export default function App() {
         </div>   
     </div>
 
-          <div>
-                <span><TextAreaComponent  value={solution}onChange={(e)=>setSolution(e.target.value)}title={obj.textAreaSolut} style={{width:'420px', height:'100px'}} ph={obj.textAreaSolut} /></span>
-          </div>
+                <span><TextAreaComponent  value={solution}onChange={(e)=>setSolution(e.target.value)}title={obj.textAreaSolut} style={{width:'300px', height:'100px'}} ph={obj.textAreaSolut} /></span>
+         
       
-          <div style={{width:'300px'}}>
+              <div style={{width:'316px', display:'flex', alignItems:'center', justifyContent:'end', padding:'.5rem 0'}}>
                <Button onClick={handleAdd}children={obj.textButtonFinish} 
-                style={{marginTop:'.5rem',  backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'95%', width:'100%' }}/>
+                style={{backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'auto', width:'auto' }}/>
       
       {!bool && 
           <>
-          <Button onClick={handleClear} children="DELETAR" style={{marginTop:'.4rem',backgroundColor:"#f54040",color:"#f7d2d2", width:"300px"}}/>
+          <Button onClick={handleClear} children="DELETAR" style={{backgroundColor:"#f54040",color:"#f7d2d2", width:"auto", marginLeft:'.5rem'}}/>
           </>
       }
-
+         
     </div>
   </section></Layout>
   
