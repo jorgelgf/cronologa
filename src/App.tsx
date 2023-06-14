@@ -119,19 +119,16 @@ export default function App() {
   <Layout>{os &&
           os.map((item, index) => (
 
-
             <S.DivCronology title='Clique para Copiar!' onClick={()=>{
-              const cop =`
-ANALISTA: ${item.name}
+              const cop =`ANALISTA: ${item.name}
 ------------------------------------------
 PROBLEMA CONSTATADO: ${item.problem}
 ------------------------------------------
-SOLUÇÃO: 
+SOLUÇÃO: ${datTime.toDateString()}
 ${finishSolution}
 ------------------------------------------
 VALIDADO POR: ${item.validation}
-------------------------------------------
-              `;
+------------------------------------------`;
               copy(cop);
               toast.success("Copiado!")
 
