@@ -1,13 +1,12 @@
 import { useState } from "react";
 import * as S from "./styles";
-import copy from "copy-to-clipboard";  
-import {toast } from 'react-toastify';
 
 import HeaderComponent from "./components/HeaderComponent";
 import Layout from "./components/Layout";
 import { Input } from "./components/InputComponent/styles";
 import TextAreaComponent from "./components/TextAreaComponent";
 import { Button } from "./components/ButtonComponent/styles";
+import { Done } from './components/Done';
 
 interface osProps {
   name: string;
@@ -40,7 +39,7 @@ export default function App() {
     textButtonFinish: "ENVIAR",
   }
 
-  //style inputs
+  //style dos inputs
   const SXtext={
     width: '300px'
   }
@@ -87,83 +86,110 @@ export default function App() {
     setValidation('');
   };
 
-  return<S.Container><HeaderComponent children="CRONOLOGIA"/>
+
+  return <>
+
+<S.Container>
+  <HeaderComponent children="CRONOLOGIA"/>
+
   <div className="cont" style={{display:'flex'}}>
   <Layout>
-  <section>
+    <section>
   
-    <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto' }} >
-       <div style={{marginBottom:'.2rem'}}>
-          {bool &&<span><Input onChange={(e)=>setName(e.target.value)} value={name} title={obj.inputName} type="string" placeholder={obj.inputName} style={SXtext}/></span>}
-          {boolProblem && <span><Input onClick={()=>setProblem(`${datTime.toLocaleString()} - `)}onChange={(e)=>setProblem(e.target.value)} value={problem} title ={obj.inputDesc}type="string"  placeholder={obj.inputDesc} style={SXtext}/></span>}
-          {boolCollaborator && <span><Input onChange={(e)=>setValidation(e.target.value)} value={validation} type='text' placeholder={obj.inputValid} style={SXtext} title={obj.inputValid}/></span>}
-        </div>   
-    </div>
+        <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto' }} >
+          <div style={{marginBottom:'.2rem'}}>
+              {bool &&
+              <span><Input 
+              onChange={(e)=>setName(e.target.value)} 
+              value={name} title={obj.inputName} 
+              type="string" placeholder={obj.inputName} style={SXtext}/></span>}
+              
+              {boolProblem && <span><Input onClick={()=>
+                setProblem(`${datTime.toLocaleString()} - `)}
+                onChange={(e)=>setProblem(e.target.value)} 
+                value={problem} title ={obj.inputDesc}
+                type="string"  placeholder={obj.inputDesc} 
+                style={SXtext}/></span>}
 
-                <span><TextAreaComponent  value={solution}onChange={(e)=>setSolution(e.target.value)}title={obj.textAreaSolut} style={{width:'300px', height:'100px'}} ph={obj.textAreaSolut} /></span>
+              {boolCollaborator && 
+              <span>
+              <Input onChange={(e)=>setValidation(e.target.value)}
+              value={validation} type='text' 
+              placeholder={obj.inputValid} 
+              style={SXtext} title={obj.inputValid}/></span>}
+
+          </div>   
+        </div>
+                <span>
+                  <TextAreaComponent  
+                  value={solution}
+                  onChange={(e)=>setSolution(e.target.value)}
+                  title={obj.textAreaSolut} 
+                  style={{width:'300px', height:'100px'}} 
+                  ph={obj.textAreaSolut}/>
+                  </span>
          
       
-              <div style={{width:'316px', display:'flex', alignItems:'center', justifyContent:'end', padding:'.5rem 0'}}>
-               <Button onClick={handleAdd}children={obj.textButtonFinish} 
-                style={{backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'auto', width:'auto' }}/>
+              <div 
+              style={{width:'316px', display:'flex', alignItems:'center', justifyContent:'end', padding:'.5rem 0'}}>
+              
+              <Button 
+              onClick={handleAdd}children={obj.textButtonFinish}
+              style={{backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'auto', width:'auto' }}/>
       
       {!bool && 
           <>
-          <Button onClick={handleClear} children="DELETAR" style={{backgroundColor:"#f54040",color:"#f7d2d2", width:"auto", marginLeft:'.5rem'}}/>
+          <Button onClick={handleClear} 
+          children="DELETAR" 
+          style={{backgroundColor:"#f54040",color:"#f7d2d2", width:"auto", marginLeft:'.5rem'}}/>
           </>
-      }
-         
-    </div>
-  </section></Layout>
-  
-  <Layout>{os &&
-          os.map((item, index) => (
+      }         
+              </div>
+    </section>
 
-            <S.DivCronology title='Clique para Copiar!' onClick={()=>{
-              const cop =`ANALISTA: ${item.name}
-------------------------------------------
-PROBLEMA CONSTATADO: ${item.problem}
-------------------------------------------
-SOLUÇÃO: ${datTime.toDateString()}
-${finishSolution}
-------------------------------------------
-VALIDADO POR: ${item.validation}
-------------------------------------------`;
-              copy(cop);
-              toast.success("Copiado!")
+  </Layout>  
+          <Layout>{os &&
+                os.map((item, index) => (
 
-            }}style={{cursor:'pointer'}}key={index}>
-              <>
-                <div>
-                  {" "}
-                  <b>ANALISTA: </b>
-                  {item.name}
-                </div>
-                <div>
-                  {" "}
-                  ------------------------------------------
-                  <br />
-                  <b>PROBLEMA CONSTATADO:</b>{" "}
-                  {item.problem}
-                </div>
-                ------------------------------------------
-                <br />
-                <div>
-                  <b>SOLUÇÃO: </b> <br />
+                  <S.DivCronology title='Clique para Copiar!' onClick={()=>{
+                      Done(item,datTime,finishSolution);}}
+                          style={{cursor:'pointer'}}key={index}>
+                    <>
+                      <div>
+                        {" "}
+                        <b>ANALISTA: </b>
+                        {item.name}
+                      </div>
+                      <div>
+                        {" "}
+                        ------------------------------------------
+                        <br />
+                        <b>PROBLEMA CONSTATADO:</b>{" "}
+                        {item.problem}
+                      </div>
+                      ------------------------------------------
+                      <br />
+                      <div>
+                        <b>SOLUÇÃO: </b> <br />
 
-                  {finishSolution}
-                </div>
-                ------------------------------------------
-                <br />
-                <div>
-                  <b>VALIDADO POR: </b>
-                  {item.validation}
-                </div>
-                ------------------------------------------
-                <br />
-              </>
+                        {finishSolution}
+                      </div>
+                      ------------------------------------------
+                      <br />
+                      <div>
+                        <b>VALIDADO POR: </b>
+                        {item.validation}
+                      </div>
+                      ------------------------------------------
+                      <br />
+                    </>
             </S.DivCronology>
-          ))}</Layout>
-          </div></S.Container>
+          ))}
+          
+          </Layout>
+   </div>
+          
+ </S.Container>
+</>
    
 }
