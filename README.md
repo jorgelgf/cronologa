@@ -2,7 +2,7 @@
 
 ## Utilizada para criação de cronologia de forma simples
 
-Visão do app via abaixo.
+Visão da página abaixo.
 
 
 <img src='https://i.ibb.co/yfbwhsY/img.png' alt='imagem-webSite'>
