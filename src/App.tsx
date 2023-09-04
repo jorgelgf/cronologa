@@ -179,8 +179,7 @@ setOk(true)  }
                       Done(item,datTime,finishSolution);}}
                           style={{cursor:'pointer'}}key={index}>
                     <>
-                      <div>
-                        {" "}
+                      <div>                
                         <b>ANALISTA: </b>
                         {item.name}
                       </div>
@@ -196,7 +195,7 @@ setOk(true)  }
                       <div>
                         <b>SOLUÇÃO: </b> <br />
 
-                        {finishSolution}
+                        ,{finishSolution}
                       </div>
                       ------------------------------------------
                       <br />
