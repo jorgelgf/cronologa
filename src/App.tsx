@@ -7,6 +7,8 @@ import { Input } from "./components/InputComponent/styles";
 import TextAreaComponent from "./components/TextAreaComponent";
 import { Button } from "./components/ButtonComponent/styles";
 import { Done } from './components/Done';
+import Modal from './components/Modal';
+import ButtonComponent from './components/ButtonComponent';
 
 interface osProps {
   name: string;
@@ -27,6 +29,7 @@ export default function App() {
   const [boolProblem, setBoolProblem] = useState(true);
   const [boolCollaborator,setBoolCollaborator] = useState(true);
   const [finishSolution, setFinishSolution] = useState<string[]>(['']);
+  const [ok, setOk] = useState(false)
   const datTime = new Date();
 
 
@@ -75,7 +78,7 @@ export default function App() {
     }
   };
 
-  const handleClear = () => {
+  const handleErase = () => {
     setOs([]);
     setFinishSolution([]);
     setBool(true);
@@ -84,10 +87,31 @@ export default function App() {
     setName('');
     setProblem('');
     setValidation('');
+    setOk(false);
   };
 
+  const handleClear = ()=>{
+setOk(true)  }
 
+
+  const SXyes =
+  {
+    backgroundColor:'green',
+    color:'white'
+  }
+
+  const SXno =
+  {
+    backgroundColor:'red',
+    color:'white'
+  }
   return <>
+   {ok && <Modal>
+   <div>
+      <ButtonComponent onClick={handleErase} sx={SXyes}> SIM </ButtonComponent> 
+      <ButtonComponent  onClick={()=>setOk(false)} sx={SXno}> NÃO</ButtonComponent>
+    </div>
+   </Modal>}
 
 <S.Container>
   <HeaderComponent children="CRONOLOGIA"/>
