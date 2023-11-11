@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DivHeader = styled.div`
-  letter-spacing: 5cap;
+  letter-spacing: 5px;
   display: flex;
   align-items: center;
   justify-content: space-between;
