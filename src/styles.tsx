@@ -69,7 +69,7 @@ export const DivForm = styled.div`
   height: auto;
 `;
 
-export const DivCronology = styled.div`
+export const DivChronology = styled.div`
   margin: 2rem;
   transform: translateX(-20px);
   animation: animeLeft 1s forwards;

@@ -5,7 +5,7 @@ interface ModalProps{
     children: ReactNode;
 }
 
-const Modal = ({children}:ModalProps) => {
+export const Modal = ({children}:ModalProps) => {
 
   return (
   <>
@@ -17,4 +17,3 @@ const Modal = ({children}:ModalProps) => {
   )
 }
 
-export default Modal

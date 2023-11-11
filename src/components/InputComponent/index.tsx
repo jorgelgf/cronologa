@@ -4,10 +4,11 @@ interface InputProps {
   type: string;
   style?:object;
   title?:string;
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  placeholder: string;
+  onClick?:()=>void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
-const InputComponent = ({ ...props }: InputProps) => {
+export const InputComponent = ({ ...props }: InputProps) => {
   return <S.Input {...props} />;
 };
 
-export default InputComponent;

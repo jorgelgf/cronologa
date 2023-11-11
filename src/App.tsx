@@ -1,14 +1,7 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import * as S from "./styles";
 
-import HeaderComponent from "./components/HeaderComponent";
-import Layout from "./components/Layout";
-import { Input } from "./components/InputComponent/styles";
-import TextAreaComponent from "./components/TextAreaComponent";
-import { Button } from "./components/ButtonComponent/styles";
-import { Done } from './components/Done';
-import Modal from './components/Modal';
-import ButtonComponent from './components/ButtonComponent';
+import {ButtonComponent,InputComponent,Done,HeaderComponent,Layout,Modal,TextAreaComponent} from  './components'
 
 interface osProps {
   name: string;
@@ -21,6 +14,9 @@ interface osProps {
 export default function App() {
 
   const [os, setOs] = useState<osProps[]>([]);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [boolLocalStorage,setBoolLocalStorage] = useState(false);
   const [name, setName] = useState("");
   const [problem, setProblem] = useState("");
   const [validation, setValidation] = useState("");
@@ -30,8 +26,13 @@ export default function App() {
   const [boolCollaborator,setBoolCollaborator] = useState(true);
   const [finishSolution, setFinishSolution] = useState<string[]>(['']);
   const [ok, setOk] = useState(false)
-  const datTime = new Date();
+const [saveProblem,setSaveProblem] = useState(true);
 
+  const datTime = new Date();
+useEffect(()=>{
+localStorage.setItem('Name',name);
+// eslint-disable-next-line react-hooks/exhaustive-deps
+},[boolLocalStorage])
 
 //obj para as descrições inputs/textArea/button
   const obj = {
@@ -84,12 +85,17 @@ export default function App() {
     setBool(true);
     setBoolProblem(true);
     setBoolCollaborator(true);
-    setName('');
+    setName(name);
     setProblem('');
     setValidation('');
     setOk(false);
+    setSaveProblem(true);
   };
-
+  
+const saveProblemFunction = ()=> {
+  setSaveProblem(false)
+    setProblem(`${datTime.toLocaleString()} - `)
+}
   const handleClear = ()=>{
 setOk(true)  }
 
@@ -123,21 +129,23 @@ setOk(true)  }
         <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto' }} >
           <div style={{marginBottom:'.2rem'}}>
               {bool &&
-              <span><Input 
+              <span><InputComponent 
               onChange={(e)=>setName(e.target.value)} 
-              value={name} title={obj.inputName} 
-              type="string" placeholder={obj.inputName} style={SXtext}/></span>}
+              value={`${localStorage.getItem('Name')===""?name: localStorage.getItem("Name")}`} title={obj.inputName} 
+              type="string" placeholder={obj.inputName} style={SXtext}/> 
+             {boolLocalStorage&& <ButtonComponent children = 'APAGAR' sx={{padding:'.2rem 1rem', backgroundColor:'red',color:'rgb(241, 198, 198)',marginLeft:'.4rem'}} />}
+              </span>}
               
-              {boolProblem && <span><Input onClick={()=>
-                setProblem(`${datTime.toLocaleString()} - `)}
-                onChange={(e)=>setProblem(e.target.value)} 
+              {boolProblem && <span><InputComponent onClick={()=>
+                saveProblem && saveProblemFunction()} 
+                onChange={(e)=> setProblem( e.target.value)}
                 value={problem} title ={obj.inputDesc}
                 type="string"  placeholder={obj.inputDesc} 
                 style={SXtext}/></span>}
 
               {boolCollaborator && 
               <span>
-              <Input onChange={(e)=>setValidation(e.target.value)}
+              <InputComponent onChange={(e)=>setValidation(e.target.value)}
               value={validation} type='text' 
               placeholder={obj.inputValid} 
               style={SXtext} title={obj.inputValid}/></span>}
@@ -157,15 +165,15 @@ setOk(true)  }
               <div 
               style={{width:'316px', display:'flex', alignItems:'center', justifyContent:'end', padding:'.5rem 0'}}>
               
-              <Button 
+              <ButtonComponent 
               onClick={handleAdd}children={obj.textButtonFinish}
-              style={{backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'auto', width:'auto' }}/>
+              sx={{backgroundColor:'#0F9A0C', color:'#cbe2cb',height:'auto', width:'auto' }}/>
       
       {!bool && 
           <>
-          <Button onClick={handleClear} 
+          <ButtonComponent onClick={handleClear} 
           children="DELETAR" 
-          style={{backgroundColor:"#f54040",color:"#f7d2d2", width:"auto", marginLeft:'.5rem'}}/>
+          sx={{backgroundColor:"#f54040",color:"#f7d2d2", width:"auto", marginLeft:'.5rem'}}/>
           </>
       }         
               </div>
@@ -175,7 +183,7 @@ setOk(true)  }
           <Layout>{os &&
                 os.map((item, index) => (
 
-                  <S.DivCronology title='Clique para Copiar!' onClick={()=>{
+                  <S.DivChronology title='Clique para Copiar!' onClick={()=>{
                       Done(item,datTime,finishSolution);}}
                           style={{cursor:'pointer'}}key={index}>
                     <>
@@ -206,7 +214,7 @@ setOk(true)  }
                       ------------------------------------------
                       <br />
                     </>
-            </S.DivCronology>
+            </S.DivChronology>
           ))}
           
           </Layout>

@@ -4,16 +4,15 @@ import * as S from "./styles";
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: () => void;
+  onClick?: () => void;
   sx?: object;
 }
 
-const ButtonComponent = ({ children, onClick, sx }: ButtonProps) => {
+export const ButtonComponent = ({ children, onClick, sx, ...props }: ButtonProps) => {
   return (
-    <S.Button onClick={onClick} style={sx}>
+    <S.Button onClick={onClick} style={sx} {...props}>
       {children}
     </S.Button>
   );
 };
 
-export default ButtonComponent;
