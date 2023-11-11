@@ -130,7 +130,7 @@ setOk(true)  }
           <div style={{marginBottom:'.2rem'}}>
               {bool &&
               <span><InputComponent 
-              onChange={(e)=>setName(e.target.value)} 
+              onChange={(e)=> setName(e.target.value)} 
               value={`${localStorage.getItem('Name')===""?name: localStorage.getItem("Name")}`} title={obj.inputName} 
               type="string" placeholder={obj.inputName} style={SXtext}/> 
              {boolLocalStorage&& <ButtonComponent children = 'APAGAR' sx={{padding:'.2rem 1rem', backgroundColor:'red',color:'rgb(241, 198, 198)',marginLeft:'.4rem'}} />}

@@ -8,7 +8,7 @@ top:30vh;
 left: 0;
 width: 100%;
 height: auto;
-color:#c8ceda;
+color:#ffffff;
 padding-bottom: 2rem;
 background-color: #000925e2;
 display: flex;

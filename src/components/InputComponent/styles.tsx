@@ -5,4 +5,6 @@ export const Input = styled.input`
   width: 80px;
   border-radius: 5px;
   outline: none;
+  font-family: ubuntu;
+  color:#0b1a4d;
 `;

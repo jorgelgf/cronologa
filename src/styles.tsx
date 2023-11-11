@@ -1,13 +1,12 @@
 import styled from "styled-components";
-import bg from './_img/bg.jpg'
+//import bg from './_img/bg.jpg'
 export const Container = styled.div`
   min-height: 100vh;
   width: 100%;
   display:flex ;
   flex-direction: column;
-  background-image: url(${bg});
   background-size: 100%; background-position: center;
-
+background-color: #041525;
   transform: translateX(-20px);
   animation: animeLeft 0.4s forwards;
   @keyframes animeLeft {

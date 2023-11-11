@@ -12,7 +12,7 @@ export const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 5px;
+  border-radius: 2px;
   border: none;
   cursor: pointer;
   transition: 0.3s ease all;
