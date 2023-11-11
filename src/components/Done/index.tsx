@@ -8,7 +8,7 @@ export const Done=(item:any,datTime:Date,finishSolution:object)=>
  
 const {name,problem, validation} = item ;
 
-const cop =`
+const cop =`\n
 ANALISTA: ${name}
 ------------------------------------------
 PROBLEMA CONSTATADO: ${problem}
@@ -20,6 +20,6 @@ VALIDADO POR: ${validation}
 ------------------------------------------`;
 
 copy(cop);
-toast.success("Copiado!")
+toast.success("Copiado!",{autoClose:1100})
 
 }

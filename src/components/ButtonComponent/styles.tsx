@@ -14,8 +14,11 @@ export const Button = styled.button`
   justify-content: center;
   border-radius: 2px;
   border: none;
+  margin-top: 1rem;
   cursor: pointer;
+  
   transition: 0.3s ease all;
+  
   &:hover {
     filter: brightness(1.2);
     
