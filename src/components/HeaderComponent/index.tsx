@@ -8,5 +8,3 @@ const info='Após concluir a cronologia, clique sobre o texto gerado e cole em s
 export const HeaderComponent = ({ children }: HEaderProps) => {
   return <S.DivHeader><span>{children} </span><span className='help' title={info}>?</span></S.DivHeader>;
 };
-
-

@@ -1,7 +1,7 @@
 import { useState,useEffect } from "react";
 import * as S from "./styles";
 
-import {ButtonComponent,InputComponent,Done,HeaderComponent,Layout,Modal,TextAreaComponent} from  './components'
+import {ButtonComponent,InputComponent,HeaderComponent,Layout,Modal,TextAreaComponent, ShowChronology} from  './components'
 
 interface osProps {
   name: string;
@@ -12,7 +12,6 @@ interface osProps {
   bool: boolean;
 }
 export default function App() {
-
   const [os, setOs] = useState<osProps[]>([]);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -26,11 +25,11 @@ export default function App() {
   const [boolCollaborator,setBoolCollaborator] = useState(true);
   const [finishSolution, setFinishSolution] = useState<string[]>(['']);
   const [ok, setOk] = useState(false)
-const [saveProblem,setSaveProblem] = useState(true);
-
+  const [saveProblem,setSaveProblem] = useState(true);
   const datTime = new Date();
-useEffect(()=>{
-localStorage.setItem('Name',name);
+
+  useEffect(()=>{
+  localStorage.setItem('Name',name);
 // eslint-disable-next-line react-hooks/exhaustive-deps
 },[boolLocalStorage])
 
@@ -56,8 +55,7 @@ localStorage.setItem('Name',name);
       solution,
       bool,
     };
-  
-    setOs([newOs]);
+  setOs([newOs]);
 
     if(problem!=="")
     {
@@ -93,24 +91,24 @@ localStorage.setItem('Name',name);
   };
   
 const saveProblemFunction = ()=> {
-  setSaveProblem(false)
+    setSaveProblem(false)
     setProblem(`${datTime.toLocaleString()} - `)
 }
   const handleClear = ()=>{
-setOk(true)  }
+    setOk(true)
+}
 
 
-  const SXyes =
-  {
+  const SXyes = {
     backgroundColor:'green',
     color:'white'
   }
 
-  const SXno =
-  {
+  const SXno =  {
     backgroundColor:'red',
     color:'white'
   }
+
   return <>
    {ok && <Modal>
    <div>
@@ -125,22 +123,21 @@ setOk(true)  }
   <div className="cont" style={{display:'flex'}}>
   <Layout>
     <section>
-  
         <div style={{ display:'flex',marginBottom:'.5rem', margin:'0',width:'auto' }} >
           <div style={{marginBottom:'.2rem'}}>
               {bool &&
-              <span><InputComponent 
-              onChange={(e)=> setName(e.target.value)} 
-              value={`${localStorage.getItem('Name')===""?name: localStorage.getItem("Name")}`} title={obj.inputName} 
+              <span><InputComponent
+              onChange={(e)=> setName(e.target.value)}
+              value={`${localStorage.getItem('Name')===""?name: localStorage.getItem("Name")}`} title={obj.inputName}
               type="string" placeholder={obj.inputName} style={SXtext}/> 
              {boolLocalStorage&& <ButtonComponent children = 'APAGAR' sx={{padding:'.2rem 1rem', backgroundColor:'red',color:'rgb(241, 198, 198)',marginLeft:'.4rem'}} />}
               </span>}
               
               {boolProblem && <span><InputComponent onClick={()=>
-                saveProblem && saveProblemFunction()} 
+                saveProblem && saveProblemFunction()}
                 onChange={(e)=> setProblem( e.target.value)}
                 value={problem} title ={obj.inputDesc}
-                type="string"  placeholder={obj.inputDesc} 
+                type="string"  placeholder={obj.inputDesc}
                 style={SXtext}/></span>}
 
               {boolCollaborator && 
@@ -180,47 +177,9 @@ setOk(true)  }
     </section>
 
   </Layout>  
-          <Layout>{os &&
-                os.map((item, index) => (
-
-                  <S.DivChronology title='Clique para Copiar!' onClick={()=>{
-                      Done(item,datTime,finishSolution);}}
-                          style={{cursor:'pointer'}}key={index}>
-                    <>
-                      <div>                
-                        <b>ANALISTA: </b>
-                        {item.name}
-                      </div>
-                      <div>
-                        {" "}
-                        ------------------------------------------
-                        <br />
-                        <b>PROBLEMA CONSTATADO:</b>{" "}
-                        {item.problem}
-                      </div>
-                      ------------------------------------------
-                      <br />
-                      <div>
-                        <b>SOLUÇÃO: </b> <br />
-
-                        ,{finishSolution}
-                      </div>
-                      ------------------------------------------
-                      <br />
-                      <div>
-                        <b>VALIDADO POR: </b>
-                        {item.validation}
-                      </div>
-                      ------------------------------------------
-                      <br />
-                    </>
-            </S.DivChronology>
-          ))}
-          
-          </Layout>
+          <Layout>{os && <ShowChronology os={os} finishSolution={finishSolution}/>}      
+         </Layout>
    </div>
-          
- </S.Container>
-</>
-   
+</S.Container>
+</>  
 }

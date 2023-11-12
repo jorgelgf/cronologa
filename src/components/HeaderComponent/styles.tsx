@@ -17,6 +17,9 @@ export const DivHeader = styled.div`
   box-shadow: rgba(240, 46, 170, 0.4) 3px 3px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 
   .help{
+    
+    justify-content: center;
+    align-items: center;
     font-size: .8rem;
     border: solid 1px;
     padding: .5rem;
