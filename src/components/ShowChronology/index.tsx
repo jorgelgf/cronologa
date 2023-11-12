@@ -2,11 +2,8 @@ import { Done } from '../Done';
 import * as S from './styles';
 type osProps  ={
   name: string;
-  datTime: Date;
   problem: string;
-  solution: string;
   validation: string;
-  bool: boolean;
 }
 
 interface ShowChronologyProps{

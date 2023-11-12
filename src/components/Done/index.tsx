@@ -3,7 +3,13 @@ import copy from "copy-to-clipboard";
 
 //Função de copiar arquivo gerado
 
-export const Done=(item:any,datTime:Date,finishSolution:object)=>
+type osProps  ={
+  name: string;
+  problem: string;
+  validation: string;
+}
+
+export const Done=(item:osProps,datTime:Date,finishSolution:object)=>
 {
  
 const {name,problem, validation} = item ;
